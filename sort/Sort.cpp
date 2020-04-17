@@ -10,7 +10,6 @@
 
 #include <stdio.h>
 
-// i와 j의 값을 교환
 void swap(int* i, int *j)
 {
 	int temp;
@@ -51,11 +50,10 @@ void selection_sort(int A[], int size)
 		printArray(A, size);
 	}
 }
-void inserttion_sort(int A[], int size)
+void insertion_sort(int A[], int size)
 {
 	int i, j, k;
 	int newValue;
-
 	for (i = 1; i < size; i++)
 	{
 		newValue = A[i];
@@ -72,7 +70,6 @@ void inserttion_sort(int A[], int size)
 		printf("\n");
 
 	}
-
 }
 void bubble_sort(int A[], int size)
 {
@@ -136,7 +133,7 @@ int main()
 	int arr_size2 = sizeof(arr2) / sizeof(arr2[0]);
 	printArray(arr2, arr_size2);
 	getchar();
-	inserttion_sort(arr2, arr_size2);
+	insertion_sort(arr2, arr_size2);
 	printf("\nSorted array is \n");
 	printArray(arr2, arr_size2);
 	getchar();
