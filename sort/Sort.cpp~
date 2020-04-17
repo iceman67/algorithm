@@ -10,7 +10,6 @@
 
 #include <stdio.h>
 
-// i와 j의 값을 교환
 void swap(int* i, int *j)
 {
 	int temp;
