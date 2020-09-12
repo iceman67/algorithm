@@ -28,38 +28,33 @@ void swap(int* i, int *j)
  
 int main()
 {
-    int array[10], n, i, j,k;
+    int i, j,k;
     int swap_count = 0; 
     
-    printf("Enter number of elements\n");
-    scanf("%d", &n);
-    
-    printf("Enter %d integers\n", n);
-    
-    for ( i = 0 ; i < n ; i++ )
-        scanf("%d", &array[i]);
-    
-    
-    for (i = n-1; i >= 1; i-- )
+    int arr[] = { 12, 11, 13, 5, 6, 7 };
+     
+    int arr_size = sizeof(arr) / sizeof(arr[0]);
+     
+    for (i = arr_size -1; i >= 1; i-- )
     {
         printf("Largest number bubbled %d \n", i + 1);
         for ( j = 1; j <= i ; j++ )
         {
             // poition having the  largest number
-            if ( array[j-1] > array[j] ) {
-                swap(&array[j-1], &array[j]);
-    		swap_count++;
+            if (arr[j-1] > arr[j] ) {
+                swap(&arr[j-1], &arr[j]);
+    		    swap_count++;
             }
         }
         printf("Partial Result of  Bubble Sorted list :\n");
-        for ( k = 0 ; k < n ; k++ )
-            printf("%d ", array[k]);
+        for ( k = 0 ; k < arr_size; k++ )
+            printf("%d ", arr[k]);
         printf("\n");
         
     }
     printf("Bubble Sorted list in ascending order:\n");
-    for ( i = 0 ; i < n ; i++ )
-        printf("%d\n", array[i]);
+    for ( i = 0 ; i < arr_size; i++ )
+        printf("%d\n", arr[i]);
    
     printf("The number of swap count during bubble Sort:");
     printf("%d \n", swap_count);
