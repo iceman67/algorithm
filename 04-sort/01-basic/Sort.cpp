@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 //
 //  main.c
 //  sorting
@@ -28,7 +26,7 @@ void printArray(int A[], int size)
 
 int theLargest(int A[], int size) {
 
-	int largest = 0; //°¡Àå Å«°ªÀ» °®´Â À§Ä¡
+	int largest = 0; //ï¿½ï¿½ï¿½ï¿½ Å«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
 	for (int i = 1; i <= size; i++)
 		if (A[i] > A[largest]) largest = i;
 	return largest;
