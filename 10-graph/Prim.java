@@ -1,102 +1,72 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
-
-/*
-Input :  
-3 3
-1 2 1
-2 3 2
-1 3 3
-Output :
-3
-
-Input: 
-4 4
-1 2 1
-2 3 2
-2 4 4
-3 4 1
-Output: 
-4
- */
+import java.io.*;
+import java.util.Arrays;
 
 public class Prim {
-	
-	static int V, E;
-	static ArrayList<Node>[] adj;
-	
-	static class Node implements Comparable<Node> {
-		int to, weight;
-		
-		Node(int to, int weight) {
-			super();
-			this.to = to;
-			this.weight = weight;
-		}
-		
-		@Override
-		public int compareTo(Node o) {
-			return Integer.compare(this.weight, o.weight);
-		}
-		
-	}
-	private static long prim() {
-		boolean[] visited = new boolean[V + 1];
-		PriorityQueue<Node> pq = new PriorityQueue<>();
-		//Â 1ë²ˆÂ ë…¸ë“œë¶€í„°Â ì¶œë°œ
-		pq.add(new Node(1, 0));
-		long res = 0;
-		int cnt = 0;
-		while(!pq.isEmpty()) {
-			 Node edge = pq.poll();
-	         //Â ì´ë¯¸Â í™•ì¸í•œÂ ì •ì ì´ë©´Â pass
-			 if(visited[edge.to]) continue;
-			 
-		     res += edge.weight;
-		     visited[edge.to] = true;
-		     //Â ëª¨ë“ Â ë…¸ë“œë¥¼Â ë°©ë¬¸í–ˆë‹¤ë©´Â return 
-		     if(++cnt == V) return res;
-		     
-		     for (int i = 0; i < adj[edge.to].size(); i++) {
-		    	 Node next = adj[edge.to].get(i);
-		    	 if(visited[next.to]) continue;	 
-		    	 pq.add(next);
-		     }    
-		}
-		return res;
-	} 
-	
-	public static void main(String[] args) throws IOException{
+	/*
+	 * °£¼±ÀÌ ¸¹Àº °æ¿ì PrimÀÌ À¯¸®ÇÏ°í 
+	 * ÀÎÁ¢Çà·ÄÀ» »ç¿ëÇÏ´Â °ÍÀÌ À¯¿ëÇÔ
+	 * ÇÁ¸² + ÀÎÁ¢Çà·Ä ±ÃÇÕ ÁÁÀ½
+	 */
+
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		//Â ì •ì Â ê°œìˆ˜
-		V = Integer.parseInt(st.nextToken());
-		//Â ê°„ì„ Â ê°œìˆ˜ Â Â 
-		E = Integer.parseInt(st.nextToken());
+		String input1[] = br.readLine().split(" ");
+		int V = Integer.parseInt(input1[0]); // Á¤Á¡ÀÇ °³¼ö
+		int E = Integer.parseInt(input1[1]); // °£¼±ÀÇ °³¼ö
+		// Á¤Á¡ÀÇ Á¤º¸ 2°³ + ÀÌµéÀÇ °¡ÁßÄ¡ ¼øÀ¸·Î ÀÔ·ÂÀÌ µé¾î¿È.
+		int adj[][] = new int[V][V]; 
+		int result = 0;
 		
-		adj = new ArrayList[V + 1];
-		for (int i = 1; i <= V; i++){
-			adj[i] = new ArrayList<>();
+		// °£¼±ÀÇ Á¤º¸¿Í °¡ÁßÄ¡ ÀÔ·Â ¹Ş±â
+		for(int i = 0; i < E; i++) {
+			String input2[] = br.readLine().split(" ");
+			int a = Integer.parseInt(input2[0]) - 1;
+			int b = Integer.parseInt(input2[1]) - 1;
+			int c = Integer.parseInt(input2[2]);
+			// ÀÎÁ¢ Çà·Ä ±¸¼º
+			adj[a][b] = c;
+			adj[b][a] = c;
 		}
 		
-		//Â EdgeÂ ì •ë³´Â ì…ë ¥
-		for (int i = 0; i < E; i++) { 
-			st = new StringTokenizer(br.readLine());
-			int a = Integer.parseInt(st.nextToken());
-			int b = Integer.parseInt(st.nextToken());
-			int c = Integer.parseInt(st.nextToken());
-			//Â ì¸ì ‘Â ë¦¬ìŠ¤íŠ¸
+		// ¼±ÅÃµÇ¾ú´ÂÁö ¾Æ´ÑÁö ÆÇ´ÜÇÏ±â À§ÇÑ boolean ¹è¿­
+		boolean visited[] = new boolean[V];
+		// ÇöÀç ¼±ÅÃµÈ Á¤Á¡µé·ÎºÎÅÍ µµ´ŞÇÒ ¼ö ÀÖ´Â ÃÖ¼Ò °Å¸® ÀúÀå ¹è¿­
+		int distance[] = new int[V];
+		
+		// ¸ğµÎ ÃÖ´ë °ªÀ¸·Î key¸¦ °»½Å
+		Arrays.fill(distance, Integer.MAX_VALUE);
+		
+		distance[0] = 0; // Ã³À½ ¼±ÅÃÇÑ Á¤Á¡Àº °Å¸® 0
+		int cnt = 0;
+		
+		while(true) {
+			int min = Integer.MAX_VALUE;
+			int idx = 0;
+			for(int i = 0; i < V; i++) {
+				// ¼±ÅÃµÇÁö ¾Ê¾Ò°í °Å¸®¸¦ ÀúÀåÇÑ keyº¸´Ù ÀÛÀº °æ¿ì °»½Å
+				if(!visited[i] && distance[i] < min) {
+					idx = i;
+					min = distance[i];
+				}
+			}
 			
-			adj[a].add(new Node(b, c));
-			adj[b].add(new Node(a, c));
+			// ¼±ÅÃµÈ Á¤Á¡¿¡ Æ÷ÇÔ½ÃÅ´
+			visited[idx] = true;
+            // °á°ú°ª¿¡ °¡ÁßÄ¡ µ¡¼À
+			result += min;
+			cnt++;
+			
+            // cnt°¡ V¶û °°¾ÆÁö¸é ¸ğµç Á¤Á¡À» Ã³¸®ÇÑ °ÍÀÌ¹Ç·Î Á¾·á
+			if(cnt == V) break;
+			
+            // »õ·Î Ãß°¡ÇÑ Á¤Á¡À¸·ÎºÎÅÍ ¿¬°áµÇ¾î ÀÖ´Â ´Ù¸¥ Á¤Á¡ÀÇ °£¼± Á¤º¸ ¾÷µ¥ÀÌÆ®
+			for(int i = 0; i < V; i++) {
+				if(!visited[i] && adj[idx][i] > 0 && distance[i] > adj[idx][i]) {
+					distance[i] = adj[idx][i];
+				}
+			}
 		}
-		 
-		System.out.println(prim());
 		
-	}	 		
-	
+		System.out.println(result);
+	}
 }
