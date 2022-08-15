@@ -5,7 +5,7 @@
 
 * 01-what algorithm is
 * 02-analysis
-> 모든 $n$ $\le$ $n_0$ 에 대해서 $f(n)$ $\le$ $cg(n)$ 이 성립하는 양의 상수 $c$ 와 $n_0$ 이 존재하면 $f(n)$ = $cg(n)$ 이다
+> 모든 $n$ $\ge$ $n_0$ 에 대해서 $f(n)$ $\le$ $cg(n)$ 이 성립하는 양의 상수 $c$ 와 $n_0$ 이 존재하면 $f(n)$ = $cg(n)$ 이다
 * 03-recurrence
 * 04-sort 
   - 01-basic
