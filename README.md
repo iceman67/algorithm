@@ -8,8 +8,8 @@
 > 수열에서 이웃하는 두개의 항 사이에 성립하는 관계를 나타낸 관계식 : $a_{n+1}=f(a_{n})$
 * 04-sort 
 > 항목들을 체계적으로 정리하는 과정
-  - 01-basic $O(n^2)$ : selection, bubble, insert
-  - 02-advance $O(nlog(n))$ : merge, quick, heap
+  01-basic $O(n^2)$ : selection, bubble, insert
+  02-advance $O(nlog(n))$ : merge, quick, heap
 
 * 05-select algorithm 
 * 06-binary search tree
