@@ -7,8 +7,8 @@
 * 03-recurrence
 > 수열에서 이웃하는 두개의 항 사이에 성립하는 관계를 나타낸 관계식 : $a_{n+1}=f(a_{n})$
 * 04-sort 
-  - 01-basic
-  - 02-advance
+  - 01-basic : bubble, insert, selection
+  - 02-advance : merge, quick, heap
 * 05-select algorithm 
 * 06-binary search tree
 * 07-hash
