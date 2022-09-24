@@ -1,15 +1,5 @@
 //
 //  main.c
-//  BubbleSort
-//
-//  Created by Yunhee on 3/27/13.
-//  Copyright (c) 2013 Yunhee. All rights reserved.
-//
-
-#include <stdio.h>
-
-//
-//  main.c
 //  sorting
 //
 //  Created by Yunhee on 3/27/13.

@@ -11,6 +11,7 @@
 	* 02-advance $O(nlog(n))$ : merge, quick, heap
 
 * 05-select algorithm 
+   *  퀵정렬 파티션의 활ㅛ
 * 06-binary search tree
 * 07-hash
 * 09-dynamic programming (memorization)
